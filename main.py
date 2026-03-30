@@ -1,7 +1,7 @@
 import pygame
 from sprites import *
 from config import *
-import sys 
+import sys
 
 class Game:
     def __init__(self):
@@ -10,7 +10,17 @@ class Game:
         self.clock = pygame.time.Clock()
 #        self.font = pygame.font.Font("Arial, 32")
         self.running = True
-    
+
+    def createTilemap(self):
+        for i, row in enumerate(tilemap):
+            for j, colomn in enumerate(row):
+                if colomn == "B":
+                    Block(self, j, i)
+                elif colomn == "P":
+                    Player(self, j, i)
+                
+
+           
     def new(self):
         # a new game starts
         self.playing = True
@@ -20,7 +30,7 @@ class Game:
         self.enemies = pygame.sprite.LayeredUpdates()
         self.attacks = pygame.sprite.LayeredUpdates()
 
-        self.player = Player(self, 1, 2 )
+        self.createTilemap()
 
     def events(self):
         #game loop events
