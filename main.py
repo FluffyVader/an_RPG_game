@@ -1,3 +1,4 @@
+import os
 import pygame
 from sprites import *
 from config import *
@@ -11,9 +12,13 @@ class Game:
 #        self.font = pygame.font.Font("Arial, 32")
         self.running = True
 
+        self.character_spritesheet = Spritesheet("img/character.png")
+        self.terrain_spritesheet = Spritesheet("img/terrain.png")
+
     def createTilemap(self):
         for i, row in enumerate(tilemap):
             for j, colomn in enumerate(row):
+                Ground(self, j, i)
                 if colomn == "B":
                     Block(self, j, i)
                 elif colomn == "P":
@@ -62,6 +67,9 @@ class Game:
 
     def intro_screen(self):
         pass
+
+#set working directory 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 g = Game()
 g.intro_screen()
